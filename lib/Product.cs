@@ -12,9 +12,9 @@ namespace lib
         {
             outputStreamWriter.Write(Order);
             outputStreamWriter.Write(separatorChar);
-            outputStreamWriter.Write(name);
+            outputStreamWriter.Write(Name);
             outputStreamWriter.Write(separatorChar);
-            outputStreamWriter.WriteLine(price);
+            outputStreamWriter.WriteLine(Price);
         }
 
         public int CompareTo(Product other)
