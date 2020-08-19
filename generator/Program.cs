@@ -1,4 +1,5 @@
 ﻿using System;
+using lib;
 
 namespace generator
 {
@@ -6,7 +7,10 @@ namespace generator
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var filePath = System.IO.Path.Combine(Environment.CurrentDirectory, "products.dat");
+            var separateChar = ';';
+            var generator = new Generator(filePath, separateChar);
+            generator.FillRandomly();
         }
     }
 }
