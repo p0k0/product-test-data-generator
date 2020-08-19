@@ -5,16 +5,14 @@ namespace lib
 {
     public class Generator
     {
-        public Generator(string filePath, char separatorChar)
+        public Generator(char separatorChar)
         {
             this.separatorChar = separatorChar;
-            this.filePath = filePath;
         }
 
-        public void FillRandomly(int rowCount = 10000)
+        public void WriteRandomData(Stream stream, int rowCount = 10000)
         {
-            using(var fileStream = CreateFile(filePath))
-            using(var streamWriter = new StreamWriter(fileStream, System.Text.Encoding.UTF8))
+            using(var streamWriter = new StreamWriter(stream, System.Text.Encoding.UTF8))
             {
                 foreach(var row in System.Linq.Enumerable.Range(0, rowCount))
                 {
@@ -52,6 +50,5 @@ namespace lib
         private System.Text.StringBuilder nameBuilder = new System.Text.StringBuilder();
         private double price;
         private char separatorChar;
-        private string filePath;
     }
 }
