@@ -17,12 +17,10 @@ namespace lib
         public void Add(Product newProduct)
         {
             if (MinPrice <= newProduct.Price &&
-                            newProduct.Price < MaxPrice)
+                            newProduct.Price <= MaxPrice)
             {
                 this.products.Add(newProduct);
             }
-            else 
-                throw new System.Exception("This product can`t be placed into this productBucket.");
         }
 
         public void WriteAtFile(string filePath, char separatorChar)
