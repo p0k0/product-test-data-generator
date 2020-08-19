@@ -5,8 +5,9 @@ namespace lib
 {
     public class Generator
     {
-        public Generator(string filePath)
+        public Generator(string filePath, char separatorChar)
         {
+            this.separatorChar = separatorChar;
             var fileStream = CreateFile(filePath);
             fileStream = AddData(fileStream, 10000);
         }
@@ -34,7 +35,9 @@ namespace lib
         void AddRow(StreamWriter streamWriter)
         {
             streamWriter.Write(order);
+            streamWriter.Write(separatorChar);
             streamWriter.Write(name);
+            streamWriter.Write(separatorChar);
             streamWriter.WriteLine(price);
         }
 
@@ -51,5 +54,6 @@ namespace lib
         private int order = -1;
         private System.Text.StringBuilder nameBuilder = new System.Text.StringBuilder();
         private double price;
+        private char separatorChar;
     }
 }
