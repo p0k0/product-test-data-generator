@@ -8,7 +8,7 @@ namespace lib
 
         public void Init(string order, string name, string price)
         {
-            Order = System.Int16.Parse(order);
+            Order = System.Int32.Parse(order);
             Name = name;
             Price = System.Double.Parse(price);
         }
