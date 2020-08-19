@@ -8,6 +8,13 @@ namespace lib
         public string Name { get; set; }
         public double Price { get; set; }
 
+        public Product(int order, string name, double price)
+        {
+            Order = order;
+            Name = name;
+            Price = price;
+        }
+
         public void Visit(System.IO.StreamWriter outputStreamWriter, char separatorChar)
         {
             outputStreamWriter.Write(Order);
