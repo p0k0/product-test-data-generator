@@ -5,13 +5,26 @@
    "version": "0.2.0",
    "configurations": [
         {
-            "name": "generator app .NET Core Launch (console)",
+            "name": "debug generator app(to file)",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build generator",
             // If you have changed target frameworks, make sure to update the program path.
             "program": "${workspaceFolder}/generator/bin/Debug/netcoreapp3.1/generator.dll",
-            "args": [],
+            "args": ["-n products.data"],
+            "cwd": "${workspaceFolder}/generator",
+            // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "debug generator app(to stdout)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build generator",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/generator/bin/Debug/netcoreapp3.1/generator.dll",
+            "args": ["--stdout"],
             "cwd": "${workspaceFolder}/generator",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",
