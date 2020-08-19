@@ -1,6 +1,6 @@
 namespace lib
 {
-    internal class OnDataReceiveEventArgs : System.EventArgs
+    public class OnDataReceiveEventArgs : System.EventArgs
     {
         public int Order;
         public string Name;
