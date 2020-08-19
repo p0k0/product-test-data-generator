@@ -25,11 +25,11 @@ namespace lib
             };
         }
 
-        public void PersistCollectedData(string filePath, char separatorChar)
+        public void PersistCollectedData(string[] outputFiles, char separatorChar)
         {
             foreach (var (k,v) in bucketsMap)
             {
-                v.WriteAtFile($@"{filePath}-{k}.dat", separatorChar);
+                v.WriteAtFile(outputFiles[k], separatorChar);
             }
         }
 
