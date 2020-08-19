@@ -5,20 +5,20 @@
    "version": "0.2.0",
    "configurations": [
         {
-            "name": "debug generator app(to file)",
+            "name": "debug generator app(file)",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build generator",
             // If you have changed target frameworks, make sure to update the program path.
             "program": "${workspaceFolder}/generator/bin/Debug/netcoreapp3.1/generator.dll",
-            "args": ["-n products.data"],
-            "cwd": "${workspaceFolder}/generator",
+            "args": ["-n products.dat"],
+            "cwd": "${workspaceFolder}/data",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",
             "stopAtEntry": false
         },
         {
-            "name": "debug generator app(to stdout)",
+            "name": "debug generator app(stdout)",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build generator",
@@ -31,13 +31,52 @@
             "stopAtEntry": false
         },
         {
-            "name": "separator app .NET Core Launch (console)",
+            "name": "debug generator app(help)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build generator",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/generator/bin/Debug/netcoreapp3.1/generator.dll",
+            "args": ["--help"],
+            "cwd": "${workspaceFolder}/generator",
+            // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "debug separator app(file)",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build separator",
             // If you have changed target frameworks, make sure to update the program path.
             "program": "${workspaceFolder}/separator/bin/Debug/netcoreapp3.1/separator.dll",
-            "args": [],
+            "args": ["-i products.dat"],
+            "cwd": "${workspaceFolder}/data",
+            // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "debug separator app(stdin)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build separator",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/separator/bin/Debug/netcoreapp3.1/separator.dll",
+            "args": ["--stdin"],
+            "cwd": "${workspaceFolder}/separator",
+            // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "debug separator app(help)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build separator",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/separator/bin/Debug/netcoreapp3.1/separator.dll",
+            "args": ["--help"],
             "cwd": "${workspaceFolder}/separator",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",
