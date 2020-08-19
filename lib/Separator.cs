@@ -1,6 +1,5 @@
 using System.IO;
 using System;
-using System.Threading;
 
 namespace lib
 {
@@ -8,27 +7,23 @@ namespace lib
     {
         public event EventHandler<OnDataReceiveEventArgs> ReadProductHandlerSubscribers;
 
-        public Separator(string filePath, char separatorChar)
+        public Separator(char separatorChar)
         {
             this.separatorChar = separatorChar;
-            this.filePath = filePath;
         }
 
-        public void Run()
+        public void Visit(Stream stream)
         {
-            using (var fileStream = OpenFile(filePath))
+            var rowColumn = new string[3];
+            var row = default(string);
+            var e = new OnDataReceiveEventArgs();
+            using (var streamReader = new StreamReader(stream, System.Text.Encoding.UTF8))
             {
-                var rowColumn = new string[3];
-                var row = default(string);
-                var e = new OnDataReceiveEventArgs();
-                using (var streamReader = new StreamReader(fileStream, System.Text.Encoding.UTF8))
+                while ((row = streamReader.ReadLine()) != default(string))
                 {
-                    while ((row = streamReader.ReadLine()) != default(string))
-                    {
-                        rowColumn = row.Split(separatorChar);
-                        e.Init(rowColumn[0], rowColumn[1], rowColumn[2]);
-                        NotifySubscribers(e);
-                    }
+                    rowColumn = row.Split(separatorChar);
+                    e.Init(rowColumn[0], rowColumn[1], rowColumn[2]);
+                    NotifySubscribers(e);
                 }
             }
         }
@@ -37,13 +32,7 @@ namespace lib
         {
             e.Raise(this, ref ReadProductHandlerSubscribers);
         }
-
-        private FileStream OpenFile(string filePath)
-        {            
-            return new FileStream(filePath, FileMode.Open);
-        }
         
         private char separatorChar;
-        private string filePath;
     }
 }
