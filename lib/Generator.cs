@@ -11,7 +11,7 @@ namespace lib
             this.filePath = filePath;
         }
 
-        public FillRandomly(int rowCount)
+        public void FillRandomly(int rowCount = 10000)
         {
             using(var fileStream = CreateFile(filePath))
             using(var streamWriter = new StreamWriter(fileStream, System.Text.Encoding.UTF8))
@@ -26,9 +26,6 @@ namespace lib
 
         FileStream CreateFile(string filePath)
         {
-            if (File.Exists(filePath))
-                throw new Exception("File already exists");
-            
             return new FileStream(filePath, FileMode.Create);
         }
 
@@ -36,7 +33,7 @@ namespace lib
         {
             streamWriter.Write(order);
             streamWriter.Write(separatorChar);
-            streamWriter.Write(name);
+            streamWriter.Write(nameBuilder);
             streamWriter.Write(separatorChar);
             streamWriter.WriteLine(price);
         }
@@ -45,8 +42,8 @@ namespace lib
         {
             order++;
             nameBuilder.Clear(); 
-            nameBuilder.AppendLine($@"test-product-{order}");
-            price = rndGenerator.Sample() * 1000;
+            nameBuilder.Append($@"test-product-{order}");
+            price = rndGenerator.NextDouble() * 1000;
         }
 
         private Random rndGenerator = new Random(DateTime.UtcNow.Second);
