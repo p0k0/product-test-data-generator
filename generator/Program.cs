@@ -1,7 +1,9 @@
-﻿using System;
+﻿using lib;
+
+using System;
 using System.IO;
 using System.Collections.Generic;
-using lib;
+
 using CommandLine;
 using CommandLine.Text;
 
@@ -20,8 +22,8 @@ namespace generator
         {
             get 
             {
-                yield return new Example("generate to file", UnParserSettings.WithGroupSwitchesOnly(), new Options{ fileName = "products.dat" });
-                yield return new Example("generate to stdout", UnParserSettings.WithGroupSwitchesOnly(), new Options{ stdout = true });
+                yield return new Example("generate products to file", UnParserSettings.WithGroupSwitchesOnly(), new Options{ fileName = "products.dat" });
+                yield return new Example("generate products to stdout", UnParserSettings.WithGroupSwitchesOnly(), new Options{ stdout = true });
             }
         }
     }
