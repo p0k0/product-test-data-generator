@@ -26,19 +26,58 @@
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "publish",
+            "label": "publish generator (single file)",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "publish",
+                "-c", "Release",
+                "-r", "win-x64",
+                "--self-contained=false",
+                "/p:PublishSingleFile=true",
                 "${workspaceFolder}/generator/generator.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "publish separator (single file)",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "-c", "Release",
+                "-r", "win-x64",
+                "--self-contained=false",
+                "/p:PublishSingleFile=true",
+                "${workspaceFolder}/separator/separator.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "publish separator",
+            "command": "dotnet publish",
+            "type": "process",
+            "args": [
+                "${workspaceFolder}/separator/separator.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "watch",
+            "label": "watch generator",
             "command": "dotnet",
             "type": "process",
             "args": [
