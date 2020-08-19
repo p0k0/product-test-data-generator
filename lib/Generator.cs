@@ -8,8 +8,20 @@ namespace lib
         public Generator(string filePath, char separatorChar)
         {
             this.separatorChar = separatorChar;
-            var fileStream = CreateFile(filePath);
-            fileStream = AddData(fileStream, 10000);
+            this.filePath = filePath;
+        }
+
+        public FillRandomly(int rowCount)
+        {
+            using(var fileStream = CreateFile(filePath))
+            using(var streamWriter = new StreamWriter(fileStream, System.Text.Encoding.UTF8))
+            {
+                foreach(var row in System.Linq.Enumerable.Range(0, rowCount))
+                {
+                    GenerateRowData();
+                    WriteRowData(streamWriter);
+                }
+            }
         }
 
         FileStream CreateFile(string filePath)
@@ -20,19 +32,7 @@ namespace lib
             return new FileStream(filePath, FileMode.Create);
         }
 
-        FileStream AddData(FileStream fileStream, int rowCount)
-        {
-            using(var streamWriter = new StreamWriter(fileStream, System.Text.Encoding.UTF8))
-            {
-                foreach(var row in System.Linq.Enumerable.Range(0, rowCount))
-                {
-                    ReRoll();
-                    AddRow(streamWriter);
-                }
-            }
-        }
-
-        void AddRow(StreamWriter streamWriter)
+        void WriteRowData(StreamWriter streamWriter)
         {
             streamWriter.Write(order);
             streamWriter.Write(separatorChar);
@@ -41,7 +41,7 @@ namespace lib
             streamWriter.WriteLine(price);
         }
 
-        void ReRoll()
+        void GenerateRowData()
         {
             order++;
             nameBuilder.Clear(); 
@@ -55,5 +55,6 @@ namespace lib
         private System.Text.StringBuilder nameBuilder = new System.Text.StringBuilder();
         private double price;
         private char separatorChar;
+        private string filePath;
     }
 }
