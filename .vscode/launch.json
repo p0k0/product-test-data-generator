@@ -83,6 +83,19 @@
             "stopAtEntry": false
         },
         {
+            "name": "publish separator app",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "publish separator",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/separator/bin/Debug/netcoreapp3.1/separator.dll",
+            "args": ["--help"],
+            "cwd": "${workspaceFolder}/separator",
+            // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
             "name": ".NET Core Attach",
             "type": "coreclr",
             "request": "attach",
