@@ -6,7 +6,7 @@ namespace lib
 {
     public class Separator
     {
-        public event EventHandler<OnDataReceiveEventArgs> OnDataReciveHandler;
+        public event EventHandler<OnDataReceiveEventArgs> ReadProductHandlerSubscribers;
 
         public Separator(string filePath, char separatorChar)
         {
@@ -23,24 +23,23 @@ namespace lib
                 var e = new OnDataReceiveEventArgs();
                 using (var streamReader = new StreamReader(fileStream, System.Text.Encoding.UTF8))
                 {
-                    row = streamReader.ReadLine();
-                    rowColumn = row.Split(separatorChar);
-                    e.Init(rowColumn[0], rowColumn[1], rowColumn[2]);
-                    OnDataRecive(e);
+                    while ((row = streamReader.ReadLine()) != default(string))
+                    {
+                        rowColumn = row.Split(separatorChar);
+                        e.Init(rowColumn[0], rowColumn[1], rowColumn[2]);
+                        NotifySubscribers(e);
+                    }
                 }
             }
         }
-        
-        protected void OnDataRecive(OnDataReceiveEventArgs e)
+
+        protected void NotifySubscribers(OnDataReceiveEventArgs e)
         {
-            e.Raise(this, ref OnDataReciveHandler);
+            e.Raise(this, ref ReadProductHandlerSubscribers);
         }
 
         private FileStream OpenFile(string filePath)
-        {
-            if (File.Exists(filePath))
-                throw new Exception("File already exists");
-            
+        {            
             return new FileStream(filePath, FileMode.Open);
         }
         
