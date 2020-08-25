@@ -16,3 +16,5 @@ or run vscode launch
 2. debug separator app(file)
 
 3. see result at data folder
+
+p.s. please dont't forget create "data" folder at product-test-data-generator

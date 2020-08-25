@@ -6,7 +6,6 @@ namespace lib
     public class BucketManager
     {
         private readonly Dictionary<int, ProductBucket> bucketsMap;
-        private int bucketIndex = 0;
 
         public BucketManager()
         {
@@ -35,7 +34,7 @@ namespace lib
 
         public void ProductReciveHandler(object sender, OnDataReceiveEventArgs e)
         {
-            bucketIndex = GetBucketIndex(e.Price);
+            var bucketIndex = GetBucketIndex(e.Price);
             bucketsMap[bucketIndex].Add(new Product(e.Order, e.Name, e.Price));
         }
 
