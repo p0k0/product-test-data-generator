@@ -14,7 +14,7 @@ namespace lib
 
         public void Visit(Stream stream)
         {
-            var rowColumn = new string[3];
+            var rowColumn = default(string[]);
             var row = default(string);
             var e = new OnDataReceiveEventArgs();
             using (var streamReader = new StreamReader(stream, System.Text.Encoding.UTF8))
