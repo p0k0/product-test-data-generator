@@ -12,12 +12,21 @@ namespace lib
 
         public void WriteRandomData(Stream stream, int rowCount = 10000)
         {
+            System.Text.StringBuilder nameBuilder = new System.Text.StringBuilder();
+            double price = default(double);
+
             using(var streamWriter = new StreamWriter(stream, System.Text.Encoding.UTF8))
             {
-                foreach(var row in System.Linq.Enumerable.Range(0, rowCount))
+                for(var row = 0; row < rowCount; row++)
                 {
-                    GenerateRowData();
-                    WriteRowData(streamWriter);
+                    nameBuilder = CreateProductName(row);
+                    price = CreatePrice();
+                    streamWriter.Write(row);
+                    
+                    streamWriter.Write(separatorChar);
+                    streamWriter.Write(nameBuilder);
+                    streamWriter.Write(separatorChar);
+                    streamWriter.WriteLine(price);
                 }
             }
         }
@@ -27,28 +36,20 @@ namespace lib
             return new FileStream(filePath, FileMode.Create);
         }
 
-        void WriteRowData(StreamWriter streamWriter)
+        private double CreatePrice()
         {
-            streamWriter.Write(order);
-            streamWriter.Write(separatorChar);
-            streamWriter.Write(nameBuilder);
-            streamWriter.Write(separatorChar);
-            streamWriter.WriteLine(price);
+            return rndGenerator.NextDouble() * 1000;
         }
 
-        void GenerateRowData()
+        private static System.Text.StringBuilder CreateProductName(int row)
         {
-            order++;
-            nameBuilder.Clear(); 
-            nameBuilder.Append($@"test-product-{order}");
-            price = rndGenerator.NextDouble() * 1000;
+            var nameBuilder = new System.Text.StringBuilder();
+            nameBuilder.Clear();
+            nameBuilder.Append($@"test-product-{row}");
+            return nameBuilder;
         }
 
         private Random rndGenerator = new Random(DateTime.UtcNow.Second);
-        
-        private int order = -1;
-        private System.Text.StringBuilder nameBuilder = new System.Text.StringBuilder();
-        private double price;
         private char separatorChar;
     }
 }
